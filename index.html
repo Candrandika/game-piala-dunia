@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-title">World Cup</div>
+        <div id="timer">Enjoy the game!</div>
+        <button id="pause" class="disabled" onclick="onPause()">Pause</button>
+        <div id="paused" class="disabled">
+            <div class="paused">Paused</div>
+            <button id="resume" onclick="resumePause()">Resume</button>
+            <button id="restart" onclick="restartPause()">Restart</button>
+        </div>
+        <div id="loading" class="disabled">0</div>
+        <div id="end" class="disabled">
+            <div id="end-text">Ini end text</div>
+            <div id="score">0 : 0</div>
+            <button id="out" onclick="outGame()">Exit</button>
+        </div>
+        <div id="home">
+            <div class="center">
+                <div class="select">Select your team :</div>
+                <select name="my-team" id="my-team">
+                    <option value="" selected>Select your team</option>
+                    <option value="argentina">Argentina</option>
+                    <option value="australia">Australia</option>
+                    <option value="belgium">Belgium</option>
+                    <option value="brazil">Brazil</option>
+                    <option value="cameroon">Cameroon</option>
+                    <option value="canada">Canada</option>
+                    <option value="costarica">Costa Rica</option>
+                    <option value="croatia">Croatia</option>
+                    <option value="denmark">Denmark</option>
+                    <option value="ecuador">Ecuador</option>
+                    <option value="england">England</option>
+                    <option value="france">France</option>
+                    <option value="germany">Germany</option>
+                    <option value="ghana">Ghana</option>
+                    <option value="iran">Iran</option>
+                    <option value="japan">Japan</option>
+                    <option value="mexico">Mexico</option>
+                    <option value="morocco">Morocco</option>
+                    <option value="netherlands">Netherlands</option>
+                    <option value="poland">Poland</option>
+                    <option value="portugal">Portugal</option>
+                    <option value="qatar">Qatar</option>
+                    <option value="saudi_arabia">Saudi Arabia</option>
+                    <option value="senegal">Senegal</option>
+                    <option value="serbia">Serbia</option>
+                    <option value="south_korea">South Korea</option>
+                    <option value="spain">Spain</option>
+                    <option value="switzerland">Switzerland</option>
+                    <option value="tunisia">Tunisia</option>
+                    <option value="united_states">United States</option>
+                    <option value="uruguay">Uruguay</option>
+                    <option value="wales">Wales</option>
+                </select>
+                <img src="assets/team/team.png" alt="team" class="team-image" id="team-image">
+            </div>
+            <div class="center">
+                <div class="htp">
+                    <div class="text-bold">How To Play :</div>
+                    <p>1. Select your team and click the start button.</p>
+                    <p>2. Wait for 3 second, and the game is started.</p>
+                    <p>3. Match is running for 5 minutes, defeat your opponent before timer end.</p>
+                    <p>4. You win if your score is more than opponent.</p>
+                    <p class="text-center">~~ Good Luck ~~</p>
+                </div>
+            </div>
+            <div class="center">
+                <button id="start-btn" onclick="init()">START</button>
+            </div>
+        </div>
+        <canvas id="game"></canvas>
+    </div>
+
+    <!-- sfx -->
+    <audio src="assets/sfx/point.wav" id="point_sfx"></audio>
+    <!-- image -->
+    <img src="assets/image/bg.jpg" alt="bg" id="bg">
+    <img src="assets/image/ball.png" alt="ball" id="ball">
+
+    <!-- team -->
+    <img src="assets/team/argentina.png" class="team" alt="argentina" id="argentina">
+    <img src="assets/team/australia.png" class="team" alt="australia" id="australia">
+    <img src="assets/team/belgium.png" class="team" alt="belgium" id="belgium">
+    <img src="assets/team/brazil.png" class="team" alt="brazil" id="brazil">
+    <img src="assets/team/cameroon.png" class="team" alt="cameroon" id="cameroon">
+    <img src="assets/team/canada.png" class="team" alt="canada" id="canada">
+    <img src="assets/team/costarica.png" class="team" alt="costarica" id="costarica">
+    <img src="assets/team/croatia.png" class="team" alt="croatia" id="croatia">
+    <img src="assets/team/denmark.png" class="team" alt="denmark" id="denmark">
+    <img src="assets/team/ecuador.png" class="team" alt="ecuador" id="ecuador">
+    <img src="assets/team/england.png" class="team" alt="england" id="england">
+    <img src="assets/team/france.png" class="team" alt="france" id="france">
+    <img src="assets/team/germany.png" class="team" alt="germany" id="germany">
+    <img src="assets/team/ghana.png" class="team" alt="ghana" id="ghana">
+    <img src="assets/team/iran.png" class="team" alt="iran" id="iran">
+    <img src="assets/team/japan.png" class="team" alt="japan" id="japan">
+    <img src="assets/team/mexico.png" class="team" alt="mexico" id="mexico">
+    <img src="assets/team/morocco.png" class="team" alt="morocco" id="morocco">
+    <img src="assets/team/netherlands.png" class="team" alt="netherlands" id="netherlands">
+    <img src="assets/team/poland.png" class="team" alt="poland" id="poland">
+    <img src="assets/team/portugal.png" class="team" alt="portugal" id="portugal">
+    <img src="assets/team/qatar.png" class="team" alt="qatar" id="qatar">
+    <img src="assets/team/saudi_arabia.png" class="team" alt="saudi_arabia" id="saudi_arabia">
+    <img src="assets/team/senegal.png" class="team" alt="senegal" id="senegal">
+    <img src="assets/team/serbia.png" class="team" alt="serbia" id="serbia">
+    <img src="assets/team/south_korea.png" class="team" alt="south_korea" id="south_korea">
+    <img src="assets/team/spain.png" class="team" alt="spain" id="spain">
+    <img src="assets/team/switzerland.png" class="team" alt="switzerland" id="switzerland">
+    <img src="assets/team/tunisia.png" class="team" alt="tunisia" id="tunisia">
+    <img src="assets/team/united_states.png" class="team" alt="united_states" id="united_states">
+    <img src="assets/team/uruguay.png" class="team" alt="uruguay" id="uruguay">
+    <img src="assets/team/wales.png" class="team" alt="wales" id="wales">
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
